@@ -46,7 +46,7 @@ namespace CityAR
                 float dirLocs = entry.numberOfLines;
                 entry.color = GetColorForDepth(entry.deepth);
 
-                BuildDistrictCube(entry, false);
+                BuildDistrictBlock(entry, false);
 
                 foreach (Entry subEntry in entry.files) {
                     subEntry.x = x;
@@ -83,7 +83,7 @@ namespace CityAR
                         entry.h = 1f - z;
                     }
                     entry.deepth += 1;
-                    BuildDistrictCube(entry, true);
+                    BuildDistrictBlock(entry, true);
                 }
                 else
                 {
@@ -94,7 +94,7 @@ namespace CityAR
                         entry.w = 1f - x;
                     }
                     entry.deepth += 1;
-                    BuildDistrictCube(entry, true);
+                    BuildDistrictBlock(entry, true);
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace CityAR
          * entry: Single entry from the data set. This can be either a folder or a single file.
          * isBase: If true, the entry has no further subfolders. Buildings must be placed on top of the entry
          */
-        private void BuildDistrictCube(Entry entry, bool isBase)
+        private void BuildDistrictBlock(Entry entry, bool isBase)
         {
             if (entry == null)
             {
