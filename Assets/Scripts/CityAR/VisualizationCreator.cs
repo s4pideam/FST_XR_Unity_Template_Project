@@ -5,6 +5,8 @@ namespace CityAR
 {
     public class VisualizationCreator : MonoBehaviour
     {
+
+        public GameObject districtPrefab;
         private DataObject _dataObject;
         private GameObject _platform;
         private Data _data;
@@ -115,7 +117,32 @@ namespace CityAR
             
             if (w * h > 0)
             {
-                //TODO create district objects
+                GameObject prefabInstance = Instantiate(districtPrefab, _platform.transform, true);
+
+                if (!isBase)
+                {
+                    prefabInstance.name = entry.name;
+                    prefabInstance.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = entry.color;
+                    prefabInstance.transform.localScale = new Vector3(entry.w, 1f,entry.h);
+                    prefabInstance.transform.localPosition = new Vector3(entry.x, entry.deepth, entry.z);
+                }
+                else
+                {
+                    prefabInstance.name = entry.name+"Base";
+                    prefabInstance.transform.GetChild(0).rotation = Quaternion.Euler(90,0,0);
+                    prefabInstance.transform.localScale = new Vector3(entry.w, 1,entry.h);
+                    prefabInstance.transform.localPosition = new Vector3(entry.x, entry.deepth+0.001f, entry.z);
+
+                }
+                
+                Vector3 scale = prefabInstance.transform.localScale;
+                float scaleX = scale.x - (entry.deepth * 0.005f);
+                float scaleZ = scale.z - (entry.deepth * 0.005f);
+                float shiftX = (scale.x - scaleX) / 2f;
+                float shiftZ = (scale.z - scaleZ) / 2f;
+                prefabInstance.transform.localScale = new Vector3(scaleX, scale.y, scaleZ);
+                Vector3 position = prefabInstance.transform.localPosition;
+                prefabInstance.transform.localPosition = new Vector3(position.x - shiftX, position.y, position.z + shiftZ);
             }
         }
 
@@ -134,8 +161,30 @@ namespace CityAR
         
         private Color GetColorForDepth(int depth)
         {
-            //TODO generate a color for a given depth
-            return Color.green;
+            Color color;
+            switch (depth)
+            {
+                case 1:
+                    color = new Color(179f / 255f, 209f / 255f, 255f / 255f);
+                    break;
+                case 2:
+                    color = new Color(128f / 255f, 179f / 255f, 255f / 255f);
+                    break;
+                case 3:
+                    color = new Color(77f / 255f, 148f / 255f, 255f / 255f);
+                    break;
+                case 4:
+                    color = new Color(26f / 255f, 117f / 255f, 255f / 255f);
+                    break;
+                case 5:
+                    color = new Color(0f / 255f, 92f / 255f, 230f / 255f);
+                    break;
+                default:
+                    color = new Color(0f / 255f, 71f / 255f, 179f / 255f);
+                    break;
+            }
+
+            return color;
         }
     }
 }

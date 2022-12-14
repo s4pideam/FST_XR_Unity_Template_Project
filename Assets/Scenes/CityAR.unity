@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390c293a25cb47bf8bb5ab6832a006b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  districtPrefab: {fileID: 4492622769918400404, guid: 6ee7b1065cf15dd459b53be25719f81c, type: 3}
 --- !u!114 &854638688
 MonoBehaviour:
   m_ObjectHideFlags: 0
