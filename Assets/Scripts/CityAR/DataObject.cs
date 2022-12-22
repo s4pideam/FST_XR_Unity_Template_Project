@@ -26,13 +26,9 @@ namespace DefaultNamespace
         public int numberOfInterfaces;
         public string name;
         public string type;
-        public float x;
-        public float z;
-        public float w;
-        public float h;
-        public int deepth;
-        public GridObjectCollection goc;
-        public Entry parentEntry;
+        public Vector3 position;
+        public Vector3 scale;
+        public int depth;
         public Color color;
     }
 }
